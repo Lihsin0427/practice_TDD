@@ -9,13 +9,18 @@ class Bank
 
   def deposit(amount)
     if amount <= 0
-      raise BankError.new("amount must greater tham zero")
+      raise BankError.new("amount must greater than zero")
     end
     @money += amount
     
   end
 
   def withdraw(amount)
+    
+    if amount <= 0
+      raise BankError.new("amount must greater than zero")
+    end
+
     @money -= amount
 
     return amount
