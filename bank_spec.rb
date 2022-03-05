@@ -1,4 +1,15 @@
 class Bank
+  def initialize(money)
+    @money = money
+  end
+
+  def deposit(amount)
+    @money += amount
+  end
+
+  def balance
+    @money
+  end
 
 end 
 
@@ -15,6 +26,5 @@ RSpec.describe Bank do
   # Assert
   expect(account.balance).to be 15
   end
-
 
 end
