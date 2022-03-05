@@ -16,7 +16,7 @@ RSpec.describe Bank do
 
     it "不可以存 0 元或是小於 0 元的金額" do
       account = Bank.new(10)
-      expect { account.deposit(-1) }.to raise_exception(BankError)
+      expect { account.deposit(-1) }.to raise_exception BankAmountNegativeError
 
       # expect(account.balance).to be 10
     end
@@ -34,14 +34,14 @@ RSpec.describe Bank do
 
     it "不能領負的錢" do
       account = Bank.new(10)
-      expect { account.withdraw(-3) }.to raise_exception(BankError)
+      expect { account.withdraw(-3) }.to raise_exception BankAmountNegativeError
     end
 
-    # it "不能領超過餘額的錢" do
-    #   account = Bank.new(10)
-    #   expect { account.withdraw(20) }.to raise_exception(BankError)
+    it "不能領超過餘額的錢" do
+      account = Bank.new(10)
+      expect { account.withdraw(20) }.to raise_exception BankBlanceError
 
-    # end
+    end
 
   end
   

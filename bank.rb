@@ -1,6 +1,13 @@
 class BankError < StandardError
 end
 
+class BankAmountNegativeError < StandardError
+end
+
+class BankBlanceError < StandardError
+end
+
+
 class Bank
 
   def initialize(money)
@@ -9,7 +16,7 @@ class Bank
 
   def deposit(amount)
     if amount <= 0
-      raise BankError.new("amount must greater than zero")
+      raise BankAmountNegativeError.new("amount must greater than zero")
     end
     @money += amount
     
@@ -18,7 +25,11 @@ class Bank
   def withdraw(amount)
     
     if amount <= 0
-      raise BankError.new("amount must greater than zero")
+      raise BankAmountNegativeError.new("amount must greater than zero")
+    end
+    
+    if amount > @money
+      raise BankBlanceError.new("Blance is not enough")
     end
 
     @money -= amount
