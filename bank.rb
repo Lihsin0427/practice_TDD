@@ -9,7 +9,7 @@ class Bank
 
   def deposit(amount)
     if amount <= 0
-      raise BankError
+      raise BankError.new("amount must greater tham zero")
     end
     @money += amount
     
