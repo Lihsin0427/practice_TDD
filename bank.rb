@@ -1,24 +1,17 @@
-class BankError < StandardError
-end
-
-class BankAmountNegativeError < StandardError
-end
-
-class BankBlanceError < StandardError
-end
-
+require './bank_errors.rb'
 
 class Bank
+  attr_reader :balance
 
   def initialize(money)
-    @money = money
+    @balance = money
   end
 
   def deposit(amount)
     if amount <= 0
       raise BankAmountNegativeError.new("amount must greater than zero")
     end
-    @money += amount
+    @balance += amount
     
   end
 
@@ -28,17 +21,19 @@ class Bank
       raise BankAmountNegativeError.new("amount must greater than zero")
     end
     
-    if amount > @money
+    if not enough?(amount)
       raise BankBlanceError.new("Blance is not enough")
     end
 
-    @money -= amount
+    @balance -= amount
 
     return amount
   end
 
-  def balance
-    @money
+  private
+  
+  def enough?(amount)
+    amount < @balance
   end
 
 end 
